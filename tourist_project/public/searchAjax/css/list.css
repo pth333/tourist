@@ -1,0 +1,28 @@
+.media {
+    background-color: #fcfbfb;
+    /* padding: 10px; */
+}
+
+.media:hover {
+    background-color: #f7f7f7;
+}
+
+.media-heading {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.search-item {
+    cursor: pointer;
+}
+.search-item-destination{
+    cursor: pointer;
+}
+.search-item-location {
+    cursor: pointer;
+}
+h6 {
+    margin-bottom: 0;
+}

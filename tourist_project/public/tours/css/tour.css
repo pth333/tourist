@@ -1,0 +1,52 @@
+.package {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.package-item .package-img-container {
+    overflow: hidden;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.package-item .img-fluid {
+    border-radius: 0;
+    /* Ensure the image itself doesn't have rounded corners */
+}
+
+.container-tour{
+    margin-top: 20px;
+}
+.container-price{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.quantity_cus{
+    margin-bottom: 5px;
+}
+.discount-tag {
+    background-color: #ff4d4d;
+    /* Màu nền cho phần giảm giá */
+    color: #ffffff;
+    /* Màu chữ */
+    padding: 3px 5px;
+    /* Khoảng cách bên trong */
+    border-radius: 5px;
+    /* Bo góc */
+    font-weight: bold;
+    /* Chữ đậm */
+    margin-top: 5px;
+    /* Khoảng cách với giá tour */
+}
+
+.package-item .p-4 {
+    position: relative;
+    /* Thiết lập vị trí tương đối */
+}
+
+.package-item .p-4 .discount-tag {
+    position: absolute;
+    /* Thiết lập vị trí tuyệt đối */
+    right: 0;
+    /* Đẩy sang bên phải */
+}

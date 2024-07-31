@@ -1,0 +1,16 @@
+#feature_image_preview {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    object-fit: cover;
+}
+
+#other_images_container {
+    margin-top: 15px;
+}
+.other-image {
+    width: 150px;
+    height: 150px;
+    margin-right: 15px;
+    object-fit: cover;
+}
