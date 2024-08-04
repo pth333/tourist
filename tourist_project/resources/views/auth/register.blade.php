@@ -27,6 +27,7 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('travel/css/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/toast/jquery.toast.min.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -40,7 +41,7 @@
                         <h1 class="mb-5">Đăng Ký</h1>
                     </div>
                     <div class="bg-light rounded p-4 p-sm-5 my-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <form method="POST" action="{{ route('register.post') }}">
+                        <form>
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Họ và Tên</label>
@@ -82,7 +83,7 @@
                                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100 py-2">Đăng Ký</button>
+                            <a data-url="{{ route('register.post')}}" class="register btn btn-primary w-100 py-2">Đăng Ký</a>
                         </form>
                         <div class="text-center mt-3">
                             <a href="auth/google/redirect" class="btn btn-danger w-100 py-2"><i class="bi bi-google"></i> Đăng nhập với Google</a>
@@ -96,6 +97,36 @@
     <script src="{{ asset('jquery/jquery-3.4.1.min.js')}}"></script>
     <!-- Toast Plugin -->
     <script src="{{ asset('vendor/toast/jquery.toast.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.register').click(function() {
+                let url = $(this).data('url')
+                let name = $('#name').val();
+                let email = $('#email').val();
+                let password = $('#password').val();
+                let password_confirmation = $('#password_confirmation').val();
+                // console.log(name);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        name: name,
+                        email: email,
+                        password: password,
+                        password_confirmation: password_confirmation
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res) {
+                        console.log(res.access_token);
+                        localStorage.setItem('token', res.access_token);
+                        // window.location.href = '/trang-chu';
+                    }
+                })
+            })
+        })
+    </script>
     @if(Session::has('no'))
     <script>
         $.toast({

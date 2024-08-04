@@ -27,6 +27,7 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('travel/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/toast/jquery.toast.min.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                         <h1 class="mb-5">Đăng Nhập</h1>
                     </div>
                     <div class="bg-light rounded p-4 p-sm-5 my-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <form method="POST" action="{{ route('login.post') }}">
+                        <form id="loginForm" method="POST" action="{{ route('login.post') }}">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Địa chỉ Email</label>
@@ -83,6 +84,18 @@
     <script src="{{ asset('jquery/jquery-3.4.1.min.js')}}"></script>
     <!-- Toast Plugin -->
     <script src="{{ asset('vendor/toast/jquery.toast.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            $.ajax({
+
+            })
+        })
+    </script>
     @if(Session::has('ok'))
     <script>
         $.toast({

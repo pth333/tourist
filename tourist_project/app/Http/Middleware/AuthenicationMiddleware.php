@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthenicationMiddleware
 {
@@ -16,10 +17,15 @@ class AuthenicationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (!Auth::check()) {
-            session()->flash('no', 'Bạn cần đăng nhập để tiếp tục thao tác.');
-            return redirect()->back();
+        $token = $request->cookie('jwt_token');
+        if (!$token) {
+            return redirect()->route('login.user');
+        }
+        try {
+            $user = JWTAuth::setToken($token)->authenticate();
+            Auth::login($user);
+        } catch (\Exception $e) {
+            return redirect()->route('login')->withErrors(['error' => 'Bạn cần đăng nhập để tiếp tục thao tác.']);
         }
         return $next($request);
     }
